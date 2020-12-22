@@ -4,11 +4,18 @@ namespace design_patterns.memento
 {
     public class Editor
     {
-        private string content;
+        public string Content { get; set;  }
 
-        public void CreateState()
+        public EditorState CreateState()
         {
-            
+            return new EditorState(Content);
         }
+
+        public void restore(EditorState state)
+        {
+            Content = state.Content;
+        }
+
+
     }
 }
