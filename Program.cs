@@ -2,6 +2,7 @@
 using design_patterns.memento;
 using design_patterns.singleton;
 using design_patterns.state;
+using design_patterns.templatemethod;
 using System;
 
 namespace design_patterns
@@ -10,13 +11,21 @@ namespace design_patterns
     {
         static void Main(string[] args)
         {
-
-            DemoFactory();
-
+            DemoTemplateMethod();
+            //DemoFactory();
             //DemoSingleton();
             //DemoStatePattern();
             //DemoMementoPattern();
 
+        }
+
+        private static void DemoTemplateMethod()
+        {
+            DataProcessor excel = new ExcelData();
+            excel.ReadProcessAndSave();
+
+            DataProcessor text = new TextData();
+            text.ReadProcessAndSave();
         }
 
         private static void DemoFactory()
