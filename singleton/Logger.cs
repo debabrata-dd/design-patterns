@@ -4,31 +4,41 @@ using System.Text;
 
 namespace design_patterns.singleton
 {
-    public class Logger
+    public sealed class Logger
     {
-        private static int counter;
-        private static Logger logger;
-        private Logger() { }
+        private static int counter = 0;
+        private static readonly object obj = new object();
+        private Logger() { counter++; }
 
-        public static Logger Instance
+        private static Logger instance = null;
+        public static Logger GetInstance
         {
             get
             {
-                counter++;
-                if(logger == null)
+                //double-checked locking
+                if (instance == null)
                 {
-                    logger = new Logger();
+                    lock (obj)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new Logger();
+                        }
+                    }
                 }
-                return logger;
+                return instance;
             }
+        }
+
+        public void Log(string value)
+        {
+            Console.WriteLine(value);
         }
 
         public static int Counter
         {
-            get
-            {
-                return counter;
-            }
+            get { return counter; }
         }
+        
     }
 }

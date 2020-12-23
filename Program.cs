@@ -4,6 +4,7 @@ using design_patterns.singleton;
 using design_patterns.state;
 using design_patterns.templatemethod;
 using System;
+using System.Threading.Tasks;
 
 namespace design_patterns
 {
@@ -11,9 +12,9 @@ namespace design_patterns
     {
         static void Main(string[] args)
         {
-            DemoTemplateMethod();
+            //DemoTemplateMethod();
             //DemoFactory();
-            //DemoSingleton();
+            DemoSingleton();
             //DemoStatePattern();
             //DemoMementoPattern();
 
@@ -41,12 +42,26 @@ namespace design_patterns
 
         private static void DemoSingleton()
         {
-            Logger obj1 = Logger.Instance;
-            Logger obj2 = Logger.Instance;
+            Parallel.Invoke(()=>StudentLog(), ()=> EmployeeLog());
 
-            Console.WriteLine(obj1.GetHashCode());
-            Console.WriteLine(obj2.GetHashCode());
             Console.WriteLine(Logger.Counter);
+            //StudentLog();
+            //EmployeeLog();
+
+            //Console.WriteLine(fromStudent.GetHashCode());
+            //Console.WriteLine(fromEmployee.GetHashCode());
+        }
+
+        private static void EmployeeLog()
+        {
+            Logger fromEmployee = Logger.GetInstance;
+            fromEmployee.Log("Object2 created");
+        }
+
+        private static void StudentLog()
+        {
+            Logger fromStudent = Logger.GetInstance;
+            fromStudent.Log("Object1 created");
         }
 
         private static void DemoMementoPattern()
