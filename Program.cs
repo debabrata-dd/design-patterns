@@ -1,4 +1,5 @@
-﻿using design_patterns.memento;
+﻿using design_patterns.factory;
+using design_patterns.memento;
 using design_patterns.singleton;
 using design_patterns.state;
 using System;
@@ -9,11 +10,23 @@ namespace design_patterns
     {
         static void Main(string[] args)
         {
-            DemoSingleton();
+            DemoFactory();
 
+            //DemoSingleton();
             //DemoStatePattern();
             //DemoMementoPattern();
 
+        }
+
+        private static void DemoFactory()
+        {
+            CalculateFactory factory = new CalculateFactory();
+            Console.WriteLine("Enter 2 numbers:");
+            var a = Convert.ToDouble(Console.ReadLine());
+            var b = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Enter operation (add/subtract/devide):");
+            ICalculate obj = factory.GetCalculate(Console.ReadLine());
+            obj.Calculate(a, b);
         }
 
         private static void DemoSingleton()
