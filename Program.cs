@@ -10,6 +10,7 @@ namespace design_patterns
     {
         static void Main(string[] args)
         {
+
             DemoFactory();
 
             //DemoSingleton();
@@ -60,11 +61,11 @@ namespace design_patterns
         private static void DemoStatePattern()
         {
             Canvas canvas = new Canvas();
-            canvas.CurrentTool = new SelectionTool();
+            canvas.CurrentTool = new ToolSelection();
             canvas.MouseDown();
             canvas.MouseUp();
 
-            canvas.CurrentTool = new BrushTool();
+            canvas.CurrentTool = new ToolBrush();
             canvas.MouseDown();
             canvas.MouseUp();
         }
